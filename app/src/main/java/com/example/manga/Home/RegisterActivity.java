@@ -30,7 +30,6 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
 
-
         // Ánh xạ ID
         edtName = findViewById(R.id.edtName);
         edtEmail = findViewById(R.id.edtEmail);
@@ -47,14 +46,12 @@ public class RegisterActivity extends AppCompatActivity {
             if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(RegisterActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             } else {
-                // Thực hiện đăng ký (Lưu vào database hoặc Firebase)
                 //Toast.makeText(RegisterActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
                 dbHelper.registerUser(name,email, password);
-//                SharedPreferences.Editor editor = userPrefs.edit();
-//                editor.putBoolean()
-//                editor.apply();
-                // Chuyển hướng sang màn hình đăng nhập
-                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                SharedPreferences.Editor editor = userPrefs.edit();
+                editor.putBoolean("isLoggedIn", true);
+                editor.apply();
+
                 finish();
             }
         });
